@@ -9,15 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Aplica os 5 critérios de aceitação de uma Medição IxV.
- * Stateless - não acessa banco, não lê arquivo.
- * Recebe apenas MeasurementMetrics e TheoreticalMetrics.
- * Critérios (comuns a ENTEC e Solmetric):
- *   1. Irradiância > 700 W/m²
- *   2. Fill Factor > 0,70
- *   3. Razão Voc entre −5% e +5% → (Voc_med / Voc_teo - 1) × 100
- *   4. Razão Isc entre 0,90 e 1,10 → Isc_med / Isc_teo
- *   5. Desempenho entre 90% e 110% → (Pmax_med / Pmax_nom) × 100* */
+ * <h1>Critérios de Aceitação de Medição IxV</h1>
+ *
+ * <p>Aplica os 5 critérios de aceitação para uma medição IxV.
+ * Este componente é <b>stateless</b>: não acessa banco de dados
+ * nem lê arquivos, recebendo apenas os objetos
+ * <code>MeasurementMetrics</code> e <code>TheoreticalMetrics</code>.</p>
+ *
+ * <h2>Critérios (comuns a ENTEC e Solmetric)</h2>
+ * <ol>
+ *   <li><b>Irradiância:</b> maior que 700 W/m²</li>
+ *   <li><b>Fill Factor:</b> maior que 0,70</li>
+ *   <li><b>Razão Voc:</b> entre −5% e +5%
+ *       <br><code>(Voc_med / Voc_teo − 1) × 100</code></li>
+ *   <li><b>Razão Isc:</b> entre 0,90 e 1,10
+ *       <br><code>Isc_med / Isc_teo</code></li>
+ *   <li><b>Desempenho:</b> entre 90% e 110%
+ *       <br><code>(Pmax_med / Pmax_nom) × 100</code></li>
+ * </ol>
+ *
+ * <p>O resultado indica se a medição IxV atende aos critérios
+ * mínimos de qualidade e conformidade.</p>
+ */
+
 @Service
 public class ValidationService {
 

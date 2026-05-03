@@ -1,11 +1,26 @@
 package com.darieldon.ivcurve.model;
 
 /**
- * Valores elétricos da medição
- * Para ENTEC → usa valores corrigidos para STC (Voc_STC, Isc_STC, etc).
- * Para solmetric → utiliza valores medidos nas condições reais
- * EM ambos os casos, a irradiância e temperatura são as condições REAIS (usadas para validar irradiância mínima e calcular teórico Solmetric).
- * */
+ * <h1>Valores Elétricos da Medição</h1>
+ *
+ * <p>Define como os valores elétricos são interpretados conforme a origem dos dados:</p>
+ *
+ * <ul>
+ *   <li><b>ENTEC:</b> Utiliza valores corrigidos para STC
+ *       (ex.: Voc_STC, Isc_STC, Vm_STC, Im_STC).</li>
+ *
+ *   <li><b>Solmetric:</b> Utiliza valores medidos diretamente
+ *       nas condições reais de operação.</li>
+ * </ul>
+ *
+ * <p><b>Observação:</b> Em ambos os casos, a irradiância e a temperatura
+ * correspondem sempre às condições reais, usadas para:</p>
+ * <ul>
+ *   <li>Validar a irradiância mínima</li>
+ *   <li>Calcular os valores teóricos no caso do Solmetric</li>
+ * </ul>
+ */
+
 public record MeasurementMetrics(
         double voc,         // Voc da string (V)
         double isc,         // Isc da string (A)
@@ -19,10 +34,15 @@ public record MeasurementMetrics(
 ) {
 
     /**
-     * Calcula Pmax, FF e performance automaticamente
+     * <h1>Cálculo Automático de Pmax, FF e Performance</h1>
      *
-     * @param pmaxNominalString Potência nominal da STRING inteira em STC (W) = pmaxNominal_por_modulo * nModules *nStrings
-     * */
+     * <p>Esta função realiza o cálculo automático da potência máxima (Pmax),
+     * do fator de forma (FF) e do desempenho da string.</p>
+     *
+     * @param pmaxNominalString Potência nominal da STRING inteira em STC (W).
+     *                          Calculada como:
+     *                          <code>pmaxNominal_por_modulo × nModules × nStrings</code>
+     */
     public static MeasurementMetrics of(
             double voc, double isc, double vmpp, double impp,
             double irradiance, double temperature,

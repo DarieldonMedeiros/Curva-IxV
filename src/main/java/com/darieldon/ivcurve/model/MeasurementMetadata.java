@@ -4,10 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Identifica onde e quando a medição foi feita
- * ENTEC → parque/subcampo/inversor/pvString extraídas do nome do arquivo
- * Solmetric → parque/subcampo do campo "Project File", inversor/pvString do "Array Location"
- * */
+ * <h1>Identificação da Medição</h1>
+ *
+ * <p>Este componente identifica onde e quando a medição foi realizada,
+ * conforme a origem dos dados:</p>
+ *
+ * <ul>
+ *   <li><b>ENTEC:</b> As informações de parque, subcampo, inversor e pvString
+ *       são extraídas diretamente do nome do arquivo.</li>
+ *
+ *   <li><b>Solmetric:</b>
+ *     <ul>
+ *       <li>Parque e subcampo → obtidos do campo <i>Project File</i></li>
+ *       <li>Inversor e pvString → obtidos do campo <i>Array Location</i></li>
+ *     </ul>
+ *   </li>
+ * </ul>
+ */
+
 public record MeasurementMetadata(
         LocalDate measurementDate,
         LocalTime measurementTime,
